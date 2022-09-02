@@ -1,0 +1,48 @@
+[tasks]
+.*
+
+[options]
+mode prove
+multiclock on
+
+[engines]
+abc pdr
+
+[script]
+
+read -noverific
+read -define UNIT_DELAY
+read -define NO_PRIMITIVES
+read -define USE_POWER_PINS
+read -define FUNCTIONAL
+--pycode-begin--
+output('read -define MODULE=%s' % task)
+--pycode-end--
+
+read_verilog -noblackbox -sv needed_primitives.sv
+read_verilog -noblackbox -sv primitives.v
+read_verilog -noblackbox -sv sky130_fd_sc_hd.v
+
+read_verilog -sv scan_wrapper_one.v;
+read_verilog -sv scan_wrapper_zero.v;
+--pycode-begin--
+output('read_verilog %s.v' % task)
+--pycode-end--
+
+read_verilog -sv tinytapeout_scan.sv
+
+hierarchy -top top
+
+prep
+
+[files]
+--pycode-begin--
+output(task + ".v")
+--pycode-end--
+
+tinytapeout_scan.sv
+scan_wrapper_one.v
+scan_wrapper_zero.v
+needed_primitives.sv
+primitives.v
+sky130_fd_sc_hd.v

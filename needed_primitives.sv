@@ -9,6 +9,34 @@ module \pulldown (output D);
     assign D = 0;
 endmodule
 
+module sky130_fd_sc_hd__udp_dff$PS_pp$PG$N (
+    Q       ,
+    D       ,
+    CLK     ,
+    SET     ,
+    NOTIFIER,
+    VPWR    ,
+    VGND
+);
+
+    output Q       ;
+    input  D       ;
+    input  CLK     ;
+    input  SET     ;
+    input  NOTIFIER;
+    input  VPWR    ;
+    input  VGND    ;
+
+    reg Q;
+
+    always @(posedge CLK, posedge SET) begin
+        if (SET)
+            Q <= 1;
+        else
+            Q <= D;
+    end
+endmodule
+
 module sky130_fd_sc_hd__udp_mux_4to2 (
     X ,
     A0,

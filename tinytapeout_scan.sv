@@ -5,7 +5,7 @@ module top(input clk_in, data_in, latch_enable_in, scan_select_in);
 // Count the first few clock cycles.
 reg [2:0] counter = 0;
 wire ready = counter[2];
-wire clk_in_past;
+reg clk_in_past;
 always @(posedge gclk) begin
     clk_in_past <= clk_in;
     if (!ready && clk_in_past != clk_in)

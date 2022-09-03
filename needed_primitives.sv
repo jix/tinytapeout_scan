@@ -27,6 +27,8 @@ module sky130_fd_sc_hd__udp_mux_4to2 (
     input  S0;
     input  S1;
 
+    reg X;
+
     always @* casez ({A0, A1, A2, A3, S0, S1})
          6'b0???00: X <= 0;
          6'b1???00: X <= 1;

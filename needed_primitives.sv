@@ -9,6 +9,46 @@ module \pulldown (output D);
     assign D = 0;
 endmodule
 
+module sky130_fd_sc_hd__udp_mux_4to2 (
+    X ,
+    A0,
+    A1,
+    A2,
+    A3,
+    S0,
+    S1
+);
+
+    output X ;
+    input  A0;
+    input  A1;
+    input  A2;
+    input  A3;
+    input  S0;
+    input  S1;
+
+    always @* casez ({A0, A1, A2, A3, S0, S1})
+         6'b0???00: X <= 0;
+         6'b1???00: X <= 1;
+         6'b?0??10: X <= 0;
+         6'b?1??10: X <= 1;
+         6'b??0?01: X <= 0;
+         6'b??1?01: X <= 1;
+         6'b???011: X <= 0;
+         6'b???111: X <= 1;
+         6'b0000??: X <= 0;
+         6'b1111??: X <= 1;
+         6'b00???0: X <= 0;
+         6'b11???0: X <= 1;
+         6'b??00?1: X <= 0;
+         6'b??11?1: X <= 1;
+         6'b0?0?0?: X <= 0;
+         6'b1?1?0?: X <= 1;
+         6'b?0?01?: X <= 0;
+         6'b?1?11?: X <= 1;
+    endcase;
+endmodule
+
 module sky130_fd_sc_hd__udp_mux_2to1 (
     X ,
     A0,

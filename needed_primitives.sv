@@ -9,6 +9,22 @@ module \pulldown (output D);
     assign D = 0;
 endmodule
 
+primitive sky130_fd_sc_hd__udp_mux_2to1_N (
+    Y ,
+    A0,
+    A1,
+    S
+);
+
+    output Y ;
+    input  A0;
+    input  A1;
+    input  S ;
+
+
+    assign X = S ? !A1 : !A0;
+endprimitive
+
 module sky130_fd_sc_hd__udp_dff$PS_pp$PG$N (
     Q       ,
     D       ,

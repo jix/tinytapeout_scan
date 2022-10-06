@@ -22,7 +22,7 @@ module sky130_fd_sc_hd__udp_mux_2to1_N (
     input  S ;
 
 
-    assign X = S ? !A1 : !A0;
+    assign Y = S ? !A1 : !A0;
 endmodule
 
 module sky130_fd_sc_hd__udp_dff$PS_pp$PG$N (
